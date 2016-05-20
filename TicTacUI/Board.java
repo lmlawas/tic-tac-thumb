@@ -102,27 +102,24 @@ class Board {
 
 		frame.add(panel);
 		frame.setVisible(true);
-		playSound();
+		play();
 		// InputStream nakakatakot = Board.class.getClassLoader().getResourceAsStream("LOL.mp3");
 	}
-	public static synchronized void playSound() {
-		  new Thread(new Runnable() {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
-		    public void run() {
-		      try {
-		        
-		        File file = new File("tut.wav");
-		        // Board.class.getResourceAsStream("tut.wav")
-		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
-		        Clip clip = AudioSystem.getClip();
-		        clip.open(inputStream);
-		        clip.start(); 
-		      } catch (Exception e) {
-		        System.err.println(e.getMessage());
-		      }
-		    }
-		  }).start();
-	}
+	public static void play(){
+	// reference: http://stackoverflow.com/questions/21128797/audioinputstream-is-not-working
+	    try{   
+	    	String file = "D4NNY - Goodbye (Official Music Video).wav";
+	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(Board.class.getResource(file));
+	        AudioFormat format = inputStream.getFormat();
+	        DataLine.Info info = new DataLine.Info(Clip.class, format);
+	        Clip clip = (Clip)AudioSystem.getLine(info);
+	        clip.open(inputStream);
+	        clip.start();
+		}
+
+	    catch (IOException | LineUnavailableException | UnsupportedAudioFileException e1){
+			e1.printStackTrace();
+		}
+    }
 
 }
