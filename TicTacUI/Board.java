@@ -6,12 +6,18 @@ import java.util.*;
 
 class Board {
     
-    static JFrame frame = new JFrame("Tic Tac Thumb");
-    static JPanel panel = new JPanel();
+    static JFrame frame; 
+    static JPanel panel;
 
 	public static void main(String[] args){
+		
+		initView();
 
-		//set panel and frame size
+	}
+
+	public static void initView(){
+		frame = new JFrame("Tic Tac Thumb");
+		panel = new JPanel();
 		frame.setPreferredSize(new Dimension(600,600));
 		panel.setPreferredSize(new Dimension(600,600));
 
@@ -30,8 +36,12 @@ class Board {
 
 		JButton b1 = new JButton("X");
 		JButton b2 = new JButton("O");
-		b1.setFont(new Font("Arial", Font.PLAIN, 100));
-		b2.setFont(new Font("Arial", Font.PLAIN, 100));
+		b1.setFont(new Font("Arial", Font.PLAIN, 200));
+		b2.setFont(new Font("Arial", Font.PLAIN, 200));
+		b1.setBackground(Color.black);
+		b1.setForeground(Color.white);
+		b2.setBackground(Color.black);
+		b2.setForeground(Color.white);
 
 		b1.addActionListener(onClick);
 		b2.addActionListener(onClick);
@@ -41,11 +51,22 @@ class Board {
 
 		frame.add(panel);
 		frame.setVisible(true);
-
 	}
 
 	public static void displayResult(String result){
 		JOptionPane.showMessageDialog(frame, result);
+
+		Object[] options = {"Yes", "No"};
+
+		int choice = JOptionPane.showOptionDialog(frame, "Would you like to play again?", "Tic Tac Thumb", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		if(choice == 0){
+			frame.setVisible(false);
+			initView();
+		}
+		else{
+			JOptionPane.showMessageDialog(frame, "Bye bye! -insert thumbs up-");
+			System.exit(0);
+		}
 	}
 
 	public static void changeDisplay(){

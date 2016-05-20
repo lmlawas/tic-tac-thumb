@@ -10,10 +10,10 @@ class Tile extends JButton implements ActionListener {
     private static String symbol = "X";
 
 	public Tile(int i, int j){
-		this.setBackground(Color.white);
-		this.setForeground(Color.black);
+		this.setBackground(Color.black);
+		this.setForeground(Color.white);
 		this.setOpaque(true);
-        this.setFont(new Font("Arial", Font.PLAIN, 50));
+        this.setFont(new Font("Arial", Font.PLAIN, 90));
 		this.row = i;
 		this.col = j;
 		board[i][j] = this;
