@@ -3,6 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import javax.swing.ImageIcon;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.*;
+import java.io.*;
 
 class Board {
     
@@ -51,6 +55,11 @@ class Board {
 
 		frame.add(panel);
 		frame.setVisible(true);
+
+		java.net.URL imgURL = Board.class.getResource("nice.png");
+		ImageIcon icon = new ImageIcon(imgURL, "thumb");
+		
+		JOptionPane.showMessageDialog(frame, "Choose X or O", "Tic Tac Thumb", JOptionPane.INFORMATION_MESSAGE, icon);
 	}
 
 	public static void displayResult(String result){
@@ -90,8 +99,30 @@ class Board {
 				panel.add(b);
 			}
 		}
+
 		frame.add(panel);
 		frame.setVisible(true);
+		playSound();
+		// InputStream nakakatakot = Board.class.getClassLoader().getResourceAsStream("LOL.mp3");
+	}
+	public static synchronized void playSound() {
+		  new Thread(new Runnable() {
+		  // The wrapper thread is unnecessary, unless it blocks on the
+		  // Clip finishing; see comments.
+		    public void run() {
+		      try {
+		        
+		        File file = new File("tut.wav");
+		        // Board.class.getResourceAsStream("tut.wav")
+		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
+		        Clip clip = AudioSystem.getClip();
+		        clip.open(inputStream);
+		        clip.start(); 
+		      } catch (Exception e) {
+		        System.err.println(e.getMessage());
+		      }
+		    }
+		  }).start();
 	}
 
 }
