@@ -22,6 +22,10 @@ class Tile extends JButton implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if( board[this.row][this.col].getText().equals("") ) board[this.row][this.col].selectTile();
         Board.result = checkWin();
+        System.out.println(Board.result);
+        if( Board.result != "" ){
+            Board.displayResult();
+        }
 	}
 
 	private void selectTile(){

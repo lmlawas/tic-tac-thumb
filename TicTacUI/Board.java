@@ -6,11 +6,12 @@ import java.util.*;
 class Board {
 
     static String result = "";
+    static JFrame frame = new JFrame("Tic Tac Thumb");
 
 	public static void main(String[] args){
 
 		//initialize frame and panel
-		JFrame frame = new JFrame("Tic Tac Thumb");
+		
 		JPanel panel = new JPanel();
 
 		//set panel and frame size
@@ -33,14 +34,10 @@ class Board {
 
 		frame.add(panel);
 		frame.setVisible(true);
+		
+	}
 
-        // FIXME :(
-        while(result == ""){
-            if(result != ""){
-                JOptionPane.showMessageDialog(frame, result);
-                break;
-            }
-        }
-
+	public static void displayResult(){
+		JOptionPane.showMessageDialog(frame, result);
 	}
 }
