@@ -19,12 +19,18 @@ class Tile extends JButton implements ActionListener {
 		board[i][j] = this;
 	}
 
+    public static void changeSymbol(String s){
+        symbol = s;
+        System.out.println(s+ " =)))))))))))))))))))))");
+        Board.changeDisplay();
+    }
+
 	public void actionPerformed(ActionEvent e){
 		if( board[this.row][this.col].getText().equals("") ) board[this.row][this.col].selectTile();
-        Board.result = checkWin();
-        System.out.println(Board.result);
-        if( Board.result != "" ){
-            Board.displayResult();
+        String result = checkWin();
+        System.out.println(result);
+        if( result != "" ){
+            Board.displayResult(result);
         }
 	}
 
